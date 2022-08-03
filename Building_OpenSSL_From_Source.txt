@@ -1,0 +1,42 @@
+Build OpenSSL from Source on Windows
+-------------------------------------
+
+Prerequisites :-
+- Visual Studio (any version will do, latest if possible)
+
+- Strawberry Perl 
+  https://strawberryperl.com/
+
+- Nasm (Netwide Assembler)
+  https://www.nasm.us/
+  
+- Windows OS
+
+
+Step 1) Download the source tar ball for OpenSSL from www.openssl.org
+Step 2) Create a new folder anywhere on your Windows OS and extract the contents of tar ball into that folder.
+Step 3) Launch Visual Studio Developer Command Prompt and go to the directory where the contents of extracted tarball exists.
+Step 4) Configure Makefile using "perl configure VC-WIN64A --openssldir=C:\OpenSSL --prefix=C:\OpenSSL"
+Step 5) Start the building process by executing "nmake".
+Step 6) Install the binaries by executing the command "nmake install".
+Step 7) Make sure the folder where the OpenSSL.exe exists is included in PATH environment variable.
+
+
+
+=============================================================================================================================
+
+Building OpenSSL from source on Linux
+--------------------------------------
+
+
+Prerequisites :-
+- GCC compiler
+- Perl
+
+
+
+Step 1) Download the source tar ball of OpenSSL from www.openssl.org
+Step 2) Create a new directory anywhere on linux and extract the contents of tarball into that directory.
+Step 3) Execute ./configure to generate the Makefile.
+Step 4) Execute "make" to start the build process. Optionally execute "make -j" if you want to build OpenSSL binaries faster.
+Step 5) Execute "make install" to install the binaries.
