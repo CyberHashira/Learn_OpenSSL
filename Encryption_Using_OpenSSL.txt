@@ -1,0 +1,118 @@
+Confidentiality using OpenSSL
+------------------------------
+
+Generating secret keys
+-----------------------
+
+# Generate 16 bytes of random data
+openssl rand -hex 16
+
+# Generate 32 bytes of random hex formatted data
+openssl rand -hex 32
+
+# Generate 32 bytes of random base64 encoded data
+openssl rand -base64 32
+
+# Generate 32 bytes of random hex formatted data and save it to a file.
+openssl rand -hex -out some_data 32
+
+
+
+Generating Asymmetric Keys
+---------------------------
+
+# Generating a RSA private key
+openssl genrsa
+
+# Generating a RSA private key with a specified keysize
+openssl genrsa 1024
+openssl genrsa 2048
+
+# Storing private key to a file.
+openssl genrsa > key.pri
+openssl genrsa -out key.pri
+
+# Examining a private key
+openssl rsa -in key.pri -noout -text
+
+# Generating a public key
+openssl rsa -in key.pri -out key.pub -pubout
+
+
+
+Get the list of options/algorithms
+-----------------------------------
+
+# List of all available commands
+openssl list -commands
+ 
+# Getting the list of all digest algorithms
+openssl list -digest-algorithms
+
+# List all cipher algorithms
+openssl list -cipher-algorithms
+
+# List all public key algorithms
+openssl list -public-key-algorithms
+
+# List disabled features
+openssl list -disabled
+
+# List options for a command.
+openssl list -options aria-128-ctr
+
+
+
+Encrypting/Decrypting data
+-----------------------------
+
+# Encrypting a file (warning displayed)
+openssl aes-256-cbc -in Earth.txt -out Earth.enc -e -kfile encryption.key
+
+# Decrypting an encrypted file. (warning displayed)
+openssl aes-256-cbc -in Earth.enc -out Earth.dec -d -kfile encryption.key
+
+# Using another mechanism to encrypt and decrypt
+openssl des-ede3-cbc -in Earth.txt -out Earth.enc -e -a
+openssl des-ede3-cbc -in Earth.enc -out Earth.dec -d -a
+
+# Encrypt data with pbkdf2 and produce a Base64 encoded encrypted file.
+openssl aes-256-cbc -e -a -kfile encryption.key -pbkdf2 -in Earth.txt -out Earth.enc
+
+# Decrypt encrypted data 
+openssl aes-256-cbc -d -a -kfile encryption.key -pbkdf2 -in Earth.enc -out Earth.dec
+
+# Encrypting using PBKDF2
+openssl enc -aes-256-ctr -in Earth.txt -out Earth.enc -e -a -pbkdf2 -iter 40000
+
+# Decrypting encrypted file.
+openssl enc -aes-256-ctr -in Earth.enc -out Earth.dec -d -a -pbkdf2 -iter 40000
+
+# Print verbose output
+openssl aes-256-cbc -in Earth.txt -a -e -out Earth.enc -pbkdf2 -iter 40000 -v
+
+# Print debug information
+openssl aes-256-cbc -in Earth.txt -a -e -out Earth.enc -pbkdf2 -iter 40000 -debug
+
+# Encrypting using RSA public key
+openssl rsautl -encrypt -inkey key.pub -pubin -in Earth.txt -out Earth.enc
+
+# Decrypting using RSA private key
+openssl rsautl -decrypt -inkey key.pri -in Earth.enc -out Earth.dec
+
+
+Note : RSA encryption using OpenSSL uses PKCS1 padding by default. PKCS1 has a size limit of (keysize - 11 bytes).
+# Key Size limit
+https://www.rfc-editor.org/rfc/rfc2313
+"The length of the data D shall not be more than k-11 octets"
+
+openssl rand -out data 245
+openssl rsautl -encrypt -inkey key.pub -pubin -in data -out data.enc # should work
+
+openssl rand -out data 246
+openssl rsautl -encrypt -inkey key.pub -pubin -in data -out data.enc # Will fail
+
+# Encrypting a secret key using RSA keypair.
+openssl rand -hex -out encryption.key 32
+openssl rsautl -encrypt -inkey key.pub -pubin -in encryption.key -out encryption.key.enc
+openssl rsautl -decrypt -inkey key.pri -in encryption.key.enc -out encryption.key.dec
