@@ -1,0 +1,37 @@
+
+# Simple RSA Sign/Verify
+openssl rsautl -sign -inkey rsa.pri -in jack_and_gill.txt -out jack_and_gill.sig
+openssl rsautl -verify -inkey rsa.pub -pubin -in jack_and_gill.sig
+
+
+# Using hash based signing methods to sign/verify
+openssl sha1 -sign rsa.pri -out jack_and_gill.sig jack_and_gill.txt
+openssl sha1 -verify rsa.pub -signature jack_and_gill.sha1 jack_and_gill.txt
+
+openssl sha256 -sign rsa.pri -out jack_and_gill.sha256 jack_and_gill.txt
+openssl sha256 -verify rsa.pub -signature jack_and_gill.sha256 jack_and_gill.txt
+
+
+# Get the list of all supported digest
+openssl dgst -list
+
+
+# Alternate way to sign/verify using hashed based signing algorithm
+openssl dgst -sha256 -sign rsa.pri -out jack_and_gill.sha256 jack_and_gill.txt
+openssl dgst -sha256 -verify rsa.pub -signature jack_and_gill.sha256 jack_and_gill.txt
+
+
+# Sign/Verify using ECDSA keys.
+openssl dgst -sha256 -sign ecdsa.pri -out jack_and_gill.sig jack_and_gill.txt
+openssl dgst -sha256 -verify ecdsa.pub -signature jack_and_gill.sig jack_and_gill.txt
+
+
+# Using PSS padding scheme for signing data.
+openssl dgst -sha256 -sign rsa.pri -sigopt rsa_padding_mode:pss -out jack_and_gill.txt.sig jack_and_gill.txt
+openssl dgst -sha256 -verify rsa.pub -sigopt rsa_padding_mode:pss -signature jack_and_gill.txt.sig jack_and_gill.txt
+
+
+# Using openssl pkeyutl option to sign
+openssl sha256 -binary -out hash jack_and_gill.txt
+openssl pkeyutl -sign -in hash -inkey rsa.pri -out jack_and_gill.txt.sig -pkeyopt digest:sha256
+openssl pkeyutl -verify -inkey rsa.pub -pubin -sigfile jack_and_gill.txt.sig -in hash -pkeyopt digest:sha256
