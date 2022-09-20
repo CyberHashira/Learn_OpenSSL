@@ -1,0 +1,18 @@
+[req]
+distinguished_name = dname
+x509_extensions = cert_ext
+prompt = no
+
+[ dname ]
+CN = RootCA
+C = XY
+ST = Some State
+L = Some City
+O = Cyber Hashira
+OU = Cyber Security
+emailAddress = pki@cyberhashira.com
+
+[ cert_ext ]
+basicConstraints = CA:TRUE, pathlen:0
+keyUsage = keyCertSign, cRLSign
+subjectKeyIdentifier=hash
