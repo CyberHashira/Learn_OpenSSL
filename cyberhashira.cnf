@@ -1,0 +1,27 @@
+[req]
+distinguished_name = dname
+req_extensions = req_ext
+prompt = no
+
+[ dname ]
+CN = CyberHashira.com
+C = XY
+ST = Some State
+L = Some City
+O = Cyber Hashira
+OU = Cyber Security
+emailAddress = pki@cyberhashira.com
+
+[ req_ext ]
+basicConstraints = CA:FALSE
+keyUsage = digitalSignature, nonRepudiation
+extendedKeyUsage = serverAuth, clientAuth
+subjectKeyIdentifier=hash
+subjectAltName = @sans
+certificatePolicies= 1.2.4.5.6.7
+authorityInfoAccess = OCSP;URI:http://ocsp.myCA/
+authorityInfoAccess = caIssuers;URI:http://myCA/ca.cer
+
+[sans]
+DNS.1 = blog.cyberhashira.com
+DNS.2 = video.cyberhashira.com
