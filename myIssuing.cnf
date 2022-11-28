@@ -1,0 +1,93 @@
+[ ca ]
+default_ca = CA_default
+
+[ CA_default ]
+dir               = /home/hashi/myCA/myIssuing
+certs             = $dir/cert
+crl_dir           = $dir/crl
+new_certs_dir     = $dir/issued_certs
+database          = $dir/data/index.dat
+serial            = $dir/data/serial.dat
+RANDFILE          = $dir/private/.rand
+private_key       = $dir/private/myIssuing.key
+certificate       = $dir/cert/myIssuing.cer
+crlnumber         = $dir/data/crl_number
+crl               = $dir/crl/myIssuing.crl
+crl_extensions    = crl_ext
+default_crl_days  = 30
+default_md        = sha256
+name_opt          = ca_default
+cert_opt          = ca_default
+default_days      = 1826
+preserve          = no
+policy            = policy_any
+
+
+[ policy_any ]
+countryName             = optional
+stateOrProvinceName     = optional
+localityName            = optional
+organizationName        = optional
+organizationalUnitName  = optional
+commonName              = supplied
+emailAddress            = optional
+
+[ req ]
+default_bits        = 2048
+distinguished_name  = req_distinguished_name
+string_mask         = utf8only
+default_md          = sha256
+x509_extensions     = v3_ca
+
+[ req_distinguished_name ]
+countryName                     = Country Name (2 letter code)
+stateOrProvinceName             = State or Province Name
+localityName                    = Locality Name
+0.organizationName              = Organization Name
+organizationalUnitName          = Organizational Unit Name
+commonName                      = Common Name
+emailAddress                    = Email Address
+
+countryName_default             = 
+stateOrProvinceName_default     = 
+localityName_default            = 
+0.organizationName_default      = CyberHashira
+organizationalUnitName_default  = PKI
+emailAddress_default            = pki@home.lab
+
+[ user_cert ]
+basicConstraints = CA:FALSE
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+keyUsage = critical, nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = clientAuth, emailProtection
+crlDistributionPoints = URI:http://myCA/myIssuing.crl
+authorityInfoAccess = caIssuers;URI:http://myCA/myIssuing.cer
+
+[ server_cert ]
+basicConstraints = CA:FALSE
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer:always
+keyUsage = critical, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth
+crlDistributionPoints = URI:http://myCA/myIssuing.crl
+authorityInfoAccess = caIssuers;URI:http://myCA/myIssuing.cer
+
+[ codeSigning_cert ]
+basicConstraints = CA:FALSE
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer:always
+keyUsage = critical, digitalSignature, keyEncipherment
+extendedKeyUsage = codeSigning
+crlDistributionPoints = URI:http://myCA/myIssuing.crl
+authorityInfoAccess = caIssuers;URI:http://myCA/myIssuing.cer
+
+[ crl_ext ]
+authorityKeyIdentifier=keyid:always
+
+[ ocsp ]
+basicConstraints = CA:FALSE
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+keyUsage = critical, digitalSignature
+extendedKeyUsage = critical, OCSPSigning
