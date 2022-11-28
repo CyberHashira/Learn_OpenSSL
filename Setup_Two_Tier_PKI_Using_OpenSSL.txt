@@ -1,0 +1,276 @@
+Setup Two-Tier PKI Using OpenSSL
+==================================
+
+
+
+
+Step 1) - Setup Directory/File structure for Root CA and Issuing CA
+---------------------------------------------------------------------
+
+> Root CA File/Directory Structure
+
+mkdir -p myCA/myRoot myCA/myIssuing
+cd myCA/myRoot
+mkdir private cert issued_certs crl csr data && chmod 700 private/
+openssl rand -hex -out private/.rand 16 && chmod 600 private/.rand
+touch data/index.dat && openssl rand -hex -out data/serial.dat 8 && echo "1000" > data/crl_number && chmod 600 data/*
+
+
+> Issuing CA File/Directory Structure
+cd ../myIssuing
+mkdir -p private cert issued_certs crl csr data && chmod 700 private/
+openssl rand -hex -out private/.rand 16 && chmod 600 private/.rand
+touch data/index.dat && echo "1000" > data/crl_number && openssl rand -out data/serial.dat -hex 8 && chmod 600 data/*
+
+
+
+
+
+Step 2) - Write configuration file for myRoot and generate keys
+-----------------------------------------------------------------
+
+[ ca ]
+default_ca = CA_default
+
+[ CA_default ]
+dir               = /home/hashi/myCA/myRoot
+certs             = $dir/cert
+crl_dir           = $dir/crl
+new_certs_dir     = $dir/issued_certs
+database          = $dir/data/index.dat
+serial            = $dir/data/serial.dat
+RANDFILE          = $dir/private/.rand
+private_key       = $dir/private/myRoot.key
+certificate       = $dir/cert/myRoot.cer
+crlnumber         = $dir/data/crl_number
+crl               = $dir/crl/myRoot.crl
+crl_extensions    = crl_ext
+default_crl_days  = 30
+default_md        = sha256
+name_opt          = ca_default
+cert_opt          = ca_default
+default_days      = 3650
+preserve          = no
+policy            = policy_any
+email_in_dn    	  = no
+
+[ policy_any ]
+countryName             = supplied
+stateOrProvinceName     = optional
+organizationName        = match
+organizationalUnitName  = optional
+commonName              = supplied
+emailAddress            = optional
+
+[ req ]
+default_bits        = 2048
+distinguished_name  = req_distinguished_name
+string_mask         = utf8only
+default_md          = sha256
+x509_extensions     = v3_ca
+
+[ req_distinguished_name ]
+countryName                     = Country Name (2 letter code)
+stateOrProvinceName             = State or Province Name
+localityName                    = Locality Name
+0.organizationName              = Organization Name
+organizationalUnitName          = Organizational Unit Name
+commonName                      = Common Name
+emailAddress                    = Email Address
+
+countryName_default             = 
+stateOrProvinceName_default     = 
+localityName_default            = 
+0.organizationName_default      = CyberHashira
+organizationalUnitName_default  = PKI
+emailAddress_default            = pki@home.lab
+
+[ v3_ca ]
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always,issuer
+keyUsage = critical, digitalSignature, cRLSign, keyCertSign
+basicConstraints = critical, CA:true, pathlen:2
+crlDistributionPoints = URI:http://myCA/myRoot.crl
+
+[ v3_intermediate_ca ]
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always,issuer
+basicConstraints = critical, CA:true, pathlen:0
+keyUsage = critical, digitalSignature, cRLSign, keyCertSign
+crlDistributionPoints = URI:http://myCA/myIssuing.crl
+authorityInfoAccess = caIssuers;URI:http://myCA/myRoot.cer
+
+
+# Generate Private Key for myRoot.
+openssl ecparam -genkey -name secp521r1 | openssl ec -aes256 -out private/myRoot.key && chmod 400 private/myRoot.key
+
+# Generate Certificate for myRoot.
+openssl req -config myRoot.cnf -key private/myRoot.key -new -x509 -sha256 -extensions v3_ca -days 3650 -out cert/myRoot.cer
+
+chmod 444 cert/myRoot.cer
+
+
+
+
+
+Step 3) - Write configuration file for myIssuing and generate keys
+--------------------------------------------------------------------
+
+[ ca ]
+default_ca = CA_default
+
+[ CA_default ]
+dir               = /home/hashi/myCA/myIssuing
+certs             = $dir/cert
+crl_dir           = $dir/crl
+new_certs_dir     = $dir/issued_certs
+database          = $dir/data/index.dat
+serial            = $dir/data/serial.dat
+RANDFILE          = $dir/private/.rand
+private_key       = $dir/private/myIssuing.key
+certificate       = $dir/cert/myIssuing.cer
+crlnumber         = $dir/data/crl_number
+crl               = $dir/crl/myIssuing.crl
+crl_extensions    = crl_ext
+default_crl_days  = 30
+default_md        = sha256
+name_opt          = ca_default
+cert_opt          = ca_default
+default_days      = 1826
+preserve          = no
+policy            = policy_any
+
+
+[ policy_any ]
+countryName             = optional
+stateOrProvinceName     = optional
+localityName            = optional
+organizationName        = optional
+organizationalUnitName  = optional
+commonName              = supplied
+emailAddress            = optional
+
+[ req ]
+default_bits        = 2048
+distinguished_name  = req_distinguished_name
+string_mask         = utf8only
+default_md          = sha256
+x509_extensions     = v3_ca
+
+[ req_distinguished_name ]
+countryName                     = Country Name (2 letter code)
+stateOrProvinceName             = State or Province Name
+localityName                    = Locality Name
+0.organizationName              = Organization Name
+organizationalUnitName          = Organizational Unit Name
+commonName                      = Common Name
+emailAddress                    = Email Address
+
+countryName_default             = 
+stateOrProvinceName_default     = 
+localityName_default            = 
+0.organizationName_default      = CyberHashira
+organizationalUnitName_default  = PKI
+emailAddress_default            = pki@home.lab
+
+[ user_cert ]
+basicConstraints = CA:FALSE
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+keyUsage = critical, nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = clientAuth, emailProtection
+crlDistributionPoints = URI:http://myCA/myIssuing.crl
+authorityInfoAccess = caIssuers;URI:http://myCA/myIssuing.cer
+
+[ server_cert ]
+basicConstraints = CA:FALSE
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer:always
+keyUsage = critical, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth
+crlDistributionPoints = URI:http://myCA/myIssuing.crl
+authorityInfoAccess = caIssuers;URI:http://myCA/myIssuing.cer
+
+[ codeSigning_cert ]
+basicConstraints = CA:FALSE
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer:always
+keyUsage = critical, digitalSignature, keyEncipherment
+extendedKeyUsage = codeSigning
+crlDistributionPoints = URI:http://myCA/myIssuing.crl
+authorityInfoAccess = caIssuers;URI:http://myCA/myIssuing.cer
+
+[ crl_ext ]
+authorityKeyIdentifier=keyid:always
+
+[ ocsp ]
+basicConstraints = CA:FALSE
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+keyUsage = critical, digitalSignature
+extendedKeyUsage = critical, OCSPSigning
+
+
+# Generate Private key for myIssuingCA
+openssl genrsa -aes256 -out private/myIssuing.key 2048
+chmod 400 private/myIssuing.key
+
+# Generate Certificate Request for myIssuingCA
+openssl req -config ../myRoot/myRoot.cnf -key private/myIssuing.key -new -sha256 -out csr/myIssuing.csr
+
+# Gettting a request signed by myRoot.
+openssl ca -config ../myRoot/myRoot.cnf -extensions v3_intermediate_ca -days 1826 -notext -md sha256 -in csr/myIssuing.csr -out cert/myIssuing.cer
+chmod 444 cert/myIssuing.cer
+
+# Creating a cacert bundle.
+cat cert/myIssuing.cer ../myRoot/cert/myRoot.cer > cert/cacerts.cer
+chmod 444 cert/cacerts.cer
+
+# Verifying the certificate.
+openssl verify -CAfile cert/cacert.cer cert/myIssuing.cer
+
+
+
+
+
+
+# Generating Web Server Certificate
+--------------------------------------
+
+mkdir ~/WebSSL
+cd ~/WebSSL
+openssl genrsa -aes256 -out WebSSL.key 2048
+chmod 400 WebSSL.key 
+openssl req -config ~/myCA/myIssuing/myIssuing.cnf -key WebSSL.key -new -sha256 -out WebSSL.csr
+openssl ca -config ~/myCA/myIssuing/myIssuing.cnf -extensions server_cert -days 365 -notext -md sha256 -in WebSSL.csr -out WebSSL.cer
+
+
+
+# Generating Code Signing Certificate
+--------------------------------------
+mkdir ~/devteam
+cd ~/devteam
+openssl genrsa -aes256 -out dev.key 2048
+chmod 400 dev.key 
+openssl req -config ~/myCA/myIssuing/myIssuing.cnf -key dev.key -new -sha256 -out dev.csr
+openssl ca -config ~/myCA/myIssuing/myIssuing.cnf -extensions codeSigning_cert -days 365 -notext -md sha256 -in dev.csr -out dev.cer
+
+
+
+# Revoking a certificate
+--------------------------
+
+# Generate a blank CRL database file.
+openssl ca -config myIssuing.cnf -gencrl -out crl/myIssuing.crl
+
+# Optionally examine it if you want to
+openssl crl -in crl/myIssuing.crl -noout -text
+
+# Revoke a certificate
+openssl ca -config myIssuing.cnf -revoke ~/devteam/dev.cer
+
+# Update the crl database
+openssl ca -config myIssuing.cnf -gencrl -out crl/myIssuing.crl
+
+# Examine the CRL database to check for update
+openssl crl -in crl/myIssuing.crl -noout -text
