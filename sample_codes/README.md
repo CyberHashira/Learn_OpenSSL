@@ -9,7 +9,7 @@ These are some C++ sample codes which makes use of OpenSSL API. All these codes 
 |-----------:|------------------------------|
 |   `legacy` | Legacy code samples **DEPRECATED** |
 |  `engines` | Sample codes to load Engines **DEPRECATED** |
-| 'crypto_operation' | demonstrates crypto operations |
+| `crypto_operation` | demonstrates crypto operations |
 |      `evp` | Contains samples that uses OpenSSL EVP |
 |     `misc` | Some uncategorized sample codes |
 
