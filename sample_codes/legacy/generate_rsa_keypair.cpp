@@ -1,4 +1,5 @@
 /*
+	- Thanks for reading DISCLAIMER.txt
 	This sample demonstrates how to generate RSA keypair using OpenSSL API.
 	This method of generating RSA keypair is now deprecated by OpenSSL.
 */

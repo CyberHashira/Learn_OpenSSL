@@ -1,3 +1,8 @@
+/*
+	- Thanks for reading DISCLAIMER.txt
+	This code shows how to generate ECDSA keypair using OpenSSL EVP.
+*/
+
 #include <iostream>
 #include <openssl/ec.h>
 #include <openssl/evp.h>
@@ -21,12 +26,15 @@ int main()
 
 	if(EVP_PKEY_keygen(ecCtx, &ecKey)!=1)
 	{
-		cout << "Failed to generate RSA keypair." << ERR_error_string(ERR_get_error(),NULL) << endl;
+		cout << "Failed to generate ECDSA keypair." << ERR_error_string(ERR_get_error(),NULL) << endl;
 		exit(1);
 	}
 
+	cout << "Private Key : " << endl;
 	PEM_write_PrivateKey(stdout, ecKey, NULL, NULL, 0, NULL, NULL);
-	//PEM_write_PUBKEY(stdout, ecKey);
+	cout << endl;
+	cout << "Public Key : " << endl;
+	PEM_write_PUBKEY(stdout, ecKey);
 
 	EVP_PKEY_free(ecKey);
 	EVP_PKEY_CTX_free(ecCtx);

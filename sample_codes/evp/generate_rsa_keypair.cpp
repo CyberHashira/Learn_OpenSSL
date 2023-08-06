@@ -1,3 +1,9 @@
+/*
+        - Thanks for reading DISCLAIMER.txt
+        This code shows how to generate RSA keypair using OpenSSL EVP.
+*/
+
+
 #include <iostream>
 #include <openssl/rsa.h>
 #include <openssl/evp.h>
@@ -25,7 +31,9 @@ int main()
 		exit(1);
 	}
 
+	cout << "Private Key - " << endl;
 	PEM_write_PrivateKey(stdout, rsaKeyPair, NULL, NULL, 0, NULL, NULL);
+	cout << endl << "Public Key - " << endl;
 	PEM_write_PUBKEY(stdout, rsaKeyPair);
 
 	EVP_PKEY_free(rsaKeyPair);

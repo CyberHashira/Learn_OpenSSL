@@ -1,4 +1,5 @@
 /*
+	- Thanks for reading DISCLAIMER.txt
 	This sample demonstrates the usage of OpenSSL EVP to calculate message digest.
 	OpenSSL EVP is recommended over the old legacy API.
 */

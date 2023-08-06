@@ -1,4 +1,5 @@
 /*
+	- Thanks for reading DISCLAIMER.txt
 	This sample demonstrates how to generate 32 bytes of random data using OpenSSL API.
 */
 

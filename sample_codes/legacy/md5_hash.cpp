@@ -1,4 +1,5 @@
 /*
+	- Thanks for reading DISCLAIMER.txt
 	This sample demonstrates how to calculate MD5 message digest.
 	This method of calculating hash is deprecated since OpenSSL 3.x and it is now a part of OpenSSL legacy API.
 */

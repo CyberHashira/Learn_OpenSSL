@@ -1,4 +1,5 @@
 /*
+	- Thanks for reading DISCLAIMER.txt
 	This code generates a keypair and writes that keypair into a file.
 	A user can choose between RSA and ECDSA type.
 */
