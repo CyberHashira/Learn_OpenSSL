@@ -1,13 +1,14 @@
-# CyberHashira | OpenSSL Tutorial Series
+# CyberHashira | OpenSSL Tutorial Series 
 
-https://www.youtube.com/@CyberHashira
+    This repository contains notes for my OpenSSL tutorial videos on YouTube. Within these notes, you'll find the commands I used in those videos, along with some extra information to explain their purpose. 
 
->   This repository contains notes for my OpenSSL tutorial videos on YouTube. Within these notes, you'll find the commands I used in those videos, along with some extra information to explain their purpose. 
+    At the time of recording, I was using OpenSSL version 1.1.1, which is set to reach End-of-Support in September this year. While I believe that most of the OpenSSL 1.1.1 commands used in my videos should still function in OpenSSL 3.x.x, there might be some minor differences. Rest assured, I'm committed to keeping my notes as up-to-date as frequently as possible. If necessary, I'll remake any outdated videos to explain the changes.
 
->   At the time of recording, I was using OpenSSL version 1.1.1, which is set to reach End-of-Support in September this year. While I believe that most of the OpenSSL 1.1.1 commands used in my videos should still function in OpenSSL 3.x.x, there might be some minor differences. Rest assured, I'm committed to keeping my notes as up-to-date as frequently as possible. If necessary, I'll remake any outdated videos to explain the changes.
+URL: https://www.youtube.com/@CyberHashira
 
 
 ### Index of Notes.
+
 | # | Video Title | Relevant Notes | YouTube Video Link
 | :--- | :--- | :--- | :--- |
 | 1. | Introduction To OpenSSL | Building_OpenSSL_From_Source.txt | https://youtu.be/O1OaJmrRHrw |
