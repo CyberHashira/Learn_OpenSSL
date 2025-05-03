@@ -146,7 +146,7 @@ $ exit
 #### - Now you can open a command prompt and simply execute the openssl program.
 ![Screenshot from 2025-04-28 16-04-47](https://github.com/user-attachments/assets/8e7bbbfe-996b-4944-8465-8eb85bba3512)
 
-[TIP!]
+> [TIP!]
 > You can archive the entire OpenSSL directory using tar or zip for use on other computers.
 > Set the location of openssl.exe in the system's PATH environment variable for easy access.
 
