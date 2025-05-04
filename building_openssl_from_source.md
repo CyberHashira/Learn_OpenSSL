@@ -108,6 +108,8 @@ hashi@CyberHashira MINGW64 ~
 $ pacman -S mingw-w64-x86_64-gcc make
 </pre>
 
+![Screenshot from 2025-04-28 15-39-29](https://github.com/user-attachments/assets/1aa26160-99e4-4aa8-994f-7f5524e81349)
+
 #### - Step 4 : Download the tarball for OpenSSL.
 <pre>
 hashi@CyberHashira MINGW64 ~
@@ -143,7 +145,9 @@ $ exit
 </pre>
 
 #### - Now you can open a command prompt and simply execute the openssl program.
+![Screenshot from 2025-04-28 16-04-47](https://github.com/user-attachments/assets/8e7bbbfe-996b-4944-8465-8eb85bba3512)
 
+> [TIP!]
 > [!TIP]
 > You can archive the entire OpenSSL directory using tar or zip for use on other computers.
 > Set the location of openssl.exe in the system's PATH environment variable for easy access.
