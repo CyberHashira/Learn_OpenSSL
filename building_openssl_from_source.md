@@ -90,30 +90,31 @@ OpenSSL 3.5.0 8 Apr 2025 (Library: OpenSSL 3.5.0 8 Apr 2025)
 ### Building OpenSSL from Source on Windows
 
 Unlike Unix/Linux, Windows does not include OpenSSL as a preinstalled programme. The easiest way to obtain OpenSSL for Windows is to download the installer from the link below. They usually maintain an up-to-date installer for OpenSSL.
+
 URL: https://slproweb.com/products/Win32OpenSSL.html
 
 However, if you are someone who prefers building OpenSSL from source rather than downloading it from elsewhere, here is an easy-to-follow method.
 
-#### - Step 1) Download and install msys2.
+#### - Step 1 : Download and install msys2.
 *I find MSYS2 the easiest to use, as unlike other programmes such as Visual Studio, it is lightweight, quick to download and install, and the steps are similar to those described for Unix/Linux-based installation.*
 
 URL : https://www.msys2.org/
 
-#### - Step 2) Launch "MSYS2 MING64" from the Start Menu.
+#### - Step 2 : Launch "MSYS2 MING64" from the Start Menu.
 
-#### - Step 3) Install the following prerequisites using this command.
+#### - Step 3 : Install the following prerequisites using this command.
 <pre>
 hashi@CyberHashira MINGW64 ~
 $ pacman -S mingw-w64-x86_64-gcc make
 </pre>
 
-#### - Step 4) Download the tarball for OpenSSL.
+#### - Step 4 : Download the tarball for OpenSSL.
 <pre>
 hashi@CyberHashira MINGW64 ~
 $ wget https://github.com/openssl/openssl/releases/download/openssl-3.5.0/openssl-3.5.0.tar.gz
 </pre>
 
-#### - Step 5) Extract the contents of the tarball.
+#### - Step 5 : Extract the contents of the tarball.
 <pre>
 hashi@CyberHashira MINGW64 ~
 $ tar xf openssl-3.5.0.tar.gz
@@ -122,19 +123,19 @@ hashi@CyberHashira MINGW64 ~
 $ cd openssl-3.5.0/
 </pre>
 
-#### - Step 6) Configure the makefile.
+#### - Step 6 : Configure the makefile.
 <pre>
 hashi@CyberHashira MINGW64 ~/openssl-3.5.0
 $ ./config mingw64 --prefix=C:/OpenSSL --openssldir=C:/OpenSSL enable-fips
 </pre>
 
-#### - Step 7) Execute make command to start the build process.
+#### - Step 7 : Execute make command to start the build process.
 <pre>
 hashi@CyberHashira MINGW64 ~/openssl-3.5.0
 $ make
 </pre>
 
-#### - Step 8) Install the binaries and exit msys2.
+#### - Step 8 : Install the binaries and exit msys2.
 <pre>
 hashi@CyberHashira MINGW64 ~/openssl-3.5.0
 $ make install_sw && make install_ssldirs && make install_fips
@@ -143,10 +144,10 @@ $ exit
 
 #### - Now you can open a command prompt and simply execute the openssl program.
 
-[TIP!]
+> [!TIP]
 > You can archive the entire OpenSSL directory using tar or zip for use on other computers.
 > Set the location of openssl.exe in the system's PATH environment variable for easy access.
 
 <br>
 
-[Back to Main Page](README.md)
+[Back to main page](README.md)

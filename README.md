@@ -11,9 +11,9 @@ At the time of recording, I was using OpenSSL version 1.1.1, which is set to rea
 | # | Video Title | Relevant Notes | YouTube Video Link
 | :--- | :--- | :--- | :--- |
 | 1. | Introduction To OpenSSL | [Building OpenSSL from Source](building_openssl_from_source.md) | https://youtu.be/O1OaJmrRHrw |
-| 2. | Verifying Integrity Using OpenSSL | [To be updated/check old notes](old_notes/) | https://youtu.be/43yPfJUxRCQ |
-| 3. | Encryption Using OpenSSL | [To be updated/check old notes](old_notes/Encryption_Using_OpenSSL.txt) | https://youtu.be/Azp_zDgFAGk |
-| 4. | Generating Key Pairs using OpenSSL | [To be updated/check old notes](old_notes/Generating_Asymmetric_keys.txt) | https://youtu.be/VCDIpq84gVA |
+| 2. | Verifying Integrity Using OpenSSL | [Verifying Integrity](verifying_integrity.md) | https://youtu.be/43yPfJUxRCQ |
+| 3. | Encryption Using OpenSSL | [Encryption Using OpenSSL](encryption_using_openssl.md) | https://youtu.be/Azp_zDgFAGk |
+| 4. | Generating Key Pairs using OpenSSL | [Generating Asymmetric keys.](generating_asymmetric_keys.md) | https://youtu.be/VCDIpq84gVA |
 | 5. | Generating Digital Signatures using OpenSSL | [To be updated/check old notes](old_notes/Digital_Signatures_Using_OpenSSL.txt) | https://youtu.be/XEd0mRrlYHY |
 | 6. | HMAC and CMAC using OpenSSL | [To be updated/check old notes](old_notes/MAC_Using_OpenSSL.txt) | https://youtu.be/bvOFbPIOsY8 |
 | 7. | Digital Certificates using OpenSSL  | [To be updated/check old notes](old_notes/Digital_Certificates_Using_OpenSSL.txt) | https://youtu.be/2C6hJMGFTYk |
