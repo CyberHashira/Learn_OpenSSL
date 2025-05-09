@@ -15,8 +15,8 @@ At the time of recording, I was using OpenSSL version 1.1.1, which is set to rea
 | 3. | Encryption Using OpenSSL | [Encryption Using OpenSSL](encryption_using_openssl.md) | https://youtu.be/Azp_zDgFAGk |
 | 4. | Generating Key Pairs using OpenSSL | [Generating Asymmetric keys.](generating_asymmetric_keys.md) | https://youtu.be/VCDIpq84gVA |
 | 5. | Generating Digital Signatures using OpenSSL | [Generating Digital Signatures.](generating_digital_signatures.md) | https://youtu.be/XEd0mRrlYHY |
-| 6. | HMAC and CMAC using OpenSSL | [To be updated/check old notes](old_notes/MAC_Using_OpenSSL.txt) | https://youtu.be/bvOFbPIOsY8 |
-| 7. | Digital Certificates using OpenSSL  | [To be updated/check old notes](old_notes/Digital_Certificates_Using_OpenSSL.txt) | https://youtu.be/2C6hJMGFTYk |
+| 6. | HMAC and CMAC using OpenSSL | [Computing MAC](compute_mac.md) | https://youtu.be/bvOFbPIOsY8 |
+| 7. | Digital Certificates using OpenSSL  | [Generating Digital Certificates](digital_certificate_using_openssl.md) | https://youtu.be/2C6hJMGFTYk |
 | 8. | Introduction to OpenSSL Engines | [To be updated/check old notes](old_notes/OpenSSL_Engines.txt) | https://youtu.be/Vu1Z5ip0PpM |
 | 9. | Setting up 2-Tier CA using OpenSSL | [To be updated/check old notes](old_notes/Setup_Two_Tier_PKI_Using_OpenSSL.txt) | https://youtu.be/6h6gfLtRzqs |
 | 10. | Forks of OpenSSL | NA | https://youtu.be/IunBtZQZ-yU |
