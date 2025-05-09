@@ -4,6 +4,26 @@ In this section of my notes, I will demonstrate how you can generate key pairs, 
 
 <br>
 
+### FILE EXTENSIONS USED.
+Most documents, books, articles, and walkthrough videos use the “.pem” extension as a generic label for keys and certificates. However, I prefer to use custom file extensions that reflect the actual contents of the files, which helps me stay organised. Whether you choose to adopt this approach is entirely a matter of personal preference.
+| EXTENSION | CONTENT |
+| --- | --- |
+| .key | file containing a key (private, public, secret). |
+| .pri | file containing a private key. |
+| .pub | file containing a public key. |
+| .sec | file containing a secret key. |
+| .param | file containing a parameter. |
+| .cer | file containing a certificate. |
+| .cert | file containing a certificate. |
+| .crt | file containing a certificate. |
+| .der | DER encoded data. |
+| .pem | PEM encoded data. |
+| .b64 | Base64 encoded data. |
+| .hex | Hex encoded data. |
+| .bin | Binary data. | 
+
+<br>
+
 ### Generating RSA keypair
 
 *This section covers aspects of generating an RSA key pair.*
@@ -408,7 +428,7 @@ IcAUKusyPdkcluvJ3ncLcDjUuFuTRPzX2FmfxGuUPdI=
 
 <br>
 
-## Generating keypairs using 'openssl genpkey' option.
+### Generating keypairs using 'openssl genpkey' option.
 
 'openssl genpkey' is a modern alternative to legacy commands like genrsa, gendsa, and ecparam. Instead of remembering a separate command for each key type (RSA, DSA, ECDSA, etc.), genpkey provides a unified interface for generating all types of asymmetric keys. It also supports generating keypairs for algorithms that OpenSSL may add in the future.
 
@@ -434,16 +454,25 @@ Verifying - Enter PEM pass phrase:
 hashi@ub-ch1:~$ openssl genpkey -algorithm ED25519 -out eddsa.pri
 </pre>
 
-#### - Extract public key from a private key.
+<br>
+
+### Extracting public key from a private key.
+
+#### - Extracting RSA public key.
 <pre>
 hashi@ub-ch1:~$ openssl pkey -in rsa.pri -pubout -out rsa.pub
+</pre>
 
-ashi@ub-ch1:~$ openssl pkey -in ec.pri -pubout -out ec.pub
+#### - Extracting ECDSA public key.
+hashi@ub-ch1:~$ openssl pkey -in ec.pri -pubout -out ec.pub
 Enter pass phrase for ec.pri:
 </pre>
 
+<BR>
 
-#### - Inspecting a private key.
+### INSPECTING A PRIVATE KEY.
+
+#### - Inspecting an RSA private key.
 <pre>
 hashi@ub-ch1:~$ openssl pkey -in rsa.pri -noout -text
 Private-Key: (2048 bit, 2 primes)
@@ -473,7 +502,10 @@ exponent2:
 coefficient:
     50:5e:98:a0:3d:c3:2d:d8:a4:02:f5:be:9d:e7:bf:
     b6:9b:63:99:27:d2:21:28
+</pre>
 
+#### - Inspecting an ECDSA private key.
+<pre>
 hashi@ub-ch1:~$ openssl pkey -in ec.pri -noout -text
 Enter pass phrase for ec.pri:
 Private-Key: (384 bit)
@@ -485,7 +517,10 @@ pub:
     ec:ac:f8:39:a9:ae:d8
 ASN1 OID: secp384r1
 NIST CURVE: P-384
+</pre>
 
+#### - Inspecting an EDDSA private key.
+<pre>
 hashi@ub-ch1:~$ openssl pkey -in eddsa.pri -noout -text
 ED25519 Private-Key:
 priv:
