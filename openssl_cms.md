@@ -8,8 +8,8 @@ https://www.rfc-editor.org/rfc/rfc5652
 
 ### CMS OPTIONS
 
-| --- | --- |
 | OPTION | DESCRIPTION |
+| --- | --- |
 | -in | input file to be signed, verified, encrypted or decrypted. |
 | -out | output file. (signed or encrypted) |
 | -inkey | private key used to signing or decrypt a message. |
