@@ -17,10 +17,10 @@ At the time of recording, I was using OpenSSL version 1.1.1, which is set to rea
 | 5. | Generating Digital Signatures using OpenSSL | [Generating Digital Signatures.](generating_digital_signatures.md) | https://youtu.be/XEd0mRrlYHY |
 | 6. | HMAC and CMAC using OpenSSL | [Computing MAC](compute_mac.md) | https://youtu.be/bvOFbPIOsY8 |
 | 7. | Digital Certificates using OpenSSL  | [Generating Digital Certificates](digital_certificate_using_openssl.md) | https://youtu.be/2C6hJMGFTYk |
-| 8. | Introduction to OpenSSL Engines | [To be updated/check old notes](old_notes/OpenSSL_Engines.txt) | https://youtu.be/Vu1Z5ip0PpM |
-| 9. | Setting up 2-Tier CA using OpenSSL | [To be updated/check old notes](old_notes/Setup_Two_Tier_PKI_Using_OpenSSL.txt) | https://youtu.be/6h6gfLtRzqs |
+| 8. | Introduction to OpenSSL Engines | [OpenSSL Engines](openssl_engines.md) | https://youtu.be/Vu1Z5ip0PpM |
+| 9. | Setting up 2-Tier CA using OpenSSL | [Setup PKI](setup_two_tier_pki_using_openssl.md) | https://youtu.be/6h6gfLtRzqs |
 | 10. | Forks of OpenSSL | NA | https://youtu.be/IunBtZQZ-yU |
 | 11. | CMS using OpenSSL | [CMS using OpenSSL](openssl_cms.md) | https://youtu.be/Au1RhzK55y4 |
 | 12. | Key Formats in OpenSSL | [OpenSSL Key Formats](openssl_key_format.md) | https://youtu.be/Bva4oe5ewuQ |
-| 13. | Configuring Providers in OpenSSL 3.x | [To be updated/check old notes](old_notes/Configuring_Providers.txt) | https://youtu.be/NPxaCCih1QI |
-| 14. | Using OQSProvider | [To be updated/check old notes](old_notes/) | https://youtu.be/Cm_PIAfvo9A |
+| 13. | Configuring Providers in OpenSSL 3.x | [OpenSSL Providers](configuring_providers.md) | https://youtu.be/NPxaCCih1QI |
+| 14. | Using OQSProvider | [Using OQSProvider](using_oqsprovider_using_openssl.md) | https://youtu.be/Cm_PIAfvo9A |
