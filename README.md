@@ -24,3 +24,11 @@ At the time of recording, I was using OpenSSL version 1.1.1, which is set to rea
 | 12. | Key Formats in OpenSSL | [OpenSSL Key Formats](openssl_key_format.md) | https://youtu.be/Bva4oe5ewuQ |
 | 13. | Configuring Providers in OpenSSL 3.x | [OpenSSL Providers](configuring_providers.md) | https://youtu.be/NPxaCCih1QI |
 | 14. | Using OQSProvider | [Using OQSProvider](using_oqsprovider_using_openssl.md) | https://youtu.be/Cm_PIAfvo9A |
+
+<BR>
+
+### Sample codes
+
+I have also written several sample programs that demonstrate how to perform various cryptographic operations using the OpenSSL API. These samples were written using the latest OpenSSL 3.5 API.
+
+[Click here for sample codes](sample_codes/README.md)

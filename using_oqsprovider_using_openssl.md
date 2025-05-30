@@ -2,7 +2,6 @@
 
 In this note, I will demonstrate how to use the OQSProvider with OpenSSL. The OQSProvider is part of the Open Quantum Safe project and allows users to experiment with post-quantum secure algorithms. It leverages the liboqs library to perform all post-quantum cryptographic operations.
 
-
 ### PREREQUISITES
 
 Both the OQSProvider and liboqs must be built from source. Therefore, the following development packages are expected to be installed on the system.
